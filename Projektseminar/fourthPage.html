@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <!--head with title, own styles and bulma-->
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>
+            First Scenario
+        </title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+    <body>
+        <!--v-cloak to hide all tags until the app has loaded-->
+        <div v-cloak id="app">
+        
+            <!--Introduction of the scenario-->
+            <p v-if="seen" align="center" class="description">
+                After lunch Max decides what to do next.
+            </p>
+
+            <!--Picture of the first path that can be chosen-->
+            <div v-if="pictureA">
+                <div id="firstPictureA">
+                    <figure id="facebookPic" class="firstPicture">
+                        <img src="assets\facebook.png" width="200" height="200" alt="Durch Instagram scrollen">
+                        <figcaption align="center">He checks out his facebook</figcaption>
+                    </figure>
+                </div>
+            </div>
+            
+            <!--Picture of the second path that can be chosen-->
+            <div v-if="pictureB">
+                <div id="secondPictureB">
+                    <figure id="nikePic" class="secondPicture">
+                        <img src="assets\nike.png" width="350" height="300" alt="Mit Smartwatch joggen gehen">
+                        <figcaption align="center">He shops on nike.com</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!--Further explanation and information for the scenario, that disapperas after v-if="seen" is false by choosing a path-->
+            <div v-if="seen" id="scenarioText" class="informationText">
+                Scenario 2: Max thinks it's about time to check his facebook. On the other hand his shoes are in a very bad condition and he wants to shop on nike.com to replace them. What decision does Max make?
+            </div>
+
+            <!--div with buttons, that can be exclusively chosen using v-if, @click, toggleElement and the variable seen that was created in the vue app, the other one disappears because of the respective toggleElementA or B method-->
+            <div class="information">
+                <button v-if="seen" @click="toggleElementA(seen, pictureA)" type="submit" id="firstchoice" class="firstButton button is-link is-light has-text-black">Path 1</button>
+
+                <button v-if="seen" @click="toggleElementB(seen, pictureB)" type="submit" id="secondchoice" class="secondButton button is-link is-light has-text-black">Path 2</button>
+
+            </div>
+            
+
+            <!--Depending on the chosen path the other picture disappears and a text appears showing the consequences of the action-->
+            <div v-if="!pictureA" class="branchOne" id="ersterPfad">
+                Nike collects a lot of his data if he doesn't specify his cookie settings. 
+            </div>
+
+            <!--Depending on the chosen path the other picture disappears and a text appears showing the consequences of the action-->
+            <div v-if="!pictureB" class="branchTwo" id="zweiterPfad">
+                Facebook collects a lot of personal data to individualize suggestions made to him. 
+            </div>
+
+            <!--Buttons to go to next or previous page-->
+            
+            <a class="previousPage button has-text-black" href="thirdPage.html">&laquo; Previous page</a>
+           
+            <a class="nextPage button has-text-black" href="#.html">Next page &raquo;</a>
+            
+
+            <!--Navigation between pages-->
+            <div class="pageSelection navbar-item has-dropdown is-hoverable has-background-grey-lighter">
+                <a class="navbar-link">
+                  Page selection
+                </a>
+        
+                <div class="navbar-dropdown has-background-grey-lighter">
+                  <a class="navbar-item" href="firstPage.html">
+                    Page 1
+                  </a>
+                  <a class="navbar-item" href="secondPage.html">
+                    Page 2
+                  </a>
+                  <a class="navbar-item" href="thirdPage.html">
+                    Page 3
+                  </a>
+                  <a class="navbar-item" href="fourthPage.html">
+                    Page 4
+                  </a>
+                </div>
+            </div>
+        </div>
+
+        <!--integration of vue.js-->
+        <script src="https://unpkg.com/vue@3"></script>
+
+        <script src="./main.js"></script>
+
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
+
+    </body>
+</html>
